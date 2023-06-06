@@ -1,0 +1,19 @@
+"Write a program that computes the maximum profit that can be made by buying and selling a share
+at most twice. The second buy must be made on another date after the first sale."
+
+def maxProfit(prices):
+    min_value, max_profit = float('inf'), 0
+    first_buy_sell_profits = [0] * len(prices)
+
+    for i, val in enumerate(prices):
+        profit_today = val - min_value
+        max_profit = max(max_profit, profit_today)
+        min_value = min(min_value, val)
+        first_buy_sell_profits[i] = max_profit
+
+    max_price_so_far = float('-inf')
+    for i, val in reversed(list(enumerate(prices[1:], 1))):
+        max_price_so_far = max(max_price_so_far, val)
+        max_profit = max(max_profit, 
+                               first_buy_sell_profits[i-1] + max_price_so_far-val)
+    return max_profit
