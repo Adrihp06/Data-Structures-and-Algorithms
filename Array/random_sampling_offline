@@ -1,0 +1,9 @@
+'''Implement an algorithm that takes as input an array of distinct elements and a size, and returns
+a subset of the given size of the array elements. All subsets should be equally likely. Retum the
+result in input array itself.'''
+
+def random-sampling (k, A) :
+  for i in range(k):
+  # cenerate a random index in [i, len(A) - 1]
+    r = random.randint(i, len(A) - 1)
+    A[i], A[r] = A[r], A[i]
