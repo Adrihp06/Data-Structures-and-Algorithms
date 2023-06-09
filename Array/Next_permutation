@@ -1,0 +1,19 @@
+'''Write a program that takes as input a permutation, and returns the next permutation under dictio-
+nary ordering. If the permutation is the last permutation, return the empty array. For example, if
+the input is (1,0,3,2) your function should retum <1,2,0,3>. If the input is (3,2,1,0), return O.'''
+
+def next_permutation(perm):
+  inversion_point = len(perm) - 2
+  while inversion_point >= 0 and perm[inversion_point] > perm[inversion_point + 1]:
+    inversion_point -= 1
+    
+  if inversion_point == -1:
+    return []
+  
+  for i in reversed(range(inversion_point+1, len(perm))):
+    if perm[i] > perm[inversion_point]:
+      perm[inversion_point], perm[i] = perm[i], perm[inversion_point]
+      break
+  perm[inversion_point + 1:] = reversed(perm[inversion_point +1:])
+  return perm
+    
