@@ -1,0 +1,11 @@
+'''Given an array A of n elements and a permutation P, apply P to A'''
+def apply_permutation(perm, A):
+  for i in range(len(A)):
+    next = i
+    while perm[next] > 0:
+      # change A[i] for the element in the position perm[next]
+      A[i], A[perm[next]] = A[perm[next]], A[i]
+      temp = perm[next]
+      perm[next] -= len(perm)
+      next = temp
+  perm[:] = [a + len(perm) for a in perm]
